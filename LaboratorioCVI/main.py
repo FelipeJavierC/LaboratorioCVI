@@ -141,6 +141,7 @@ def buscarExamen():
             print("Estado: Terminado")
             print(f"Resultado: {examen.resultado()}")
             input("Enter Para Imprimir")
+            borrarExamen(id, tipo)
         else:
             print("Estado: En Proceso")
             input("Enter Para Volver Al Menu Principal")
