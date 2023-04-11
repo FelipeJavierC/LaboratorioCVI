@@ -195,7 +195,7 @@ def menuGestioUsuario():
             print("Opcion Ingresada No valida. PorFavor Ingresar De Nuevo.")
             print("--------------------------------------------------------")
 
-def menuCarrito(carro):
+def menuCarrito(carro,clinica):
     print("[Carro De Compras]".center(50, "-"))
     examenes = carro.examenes
     for j in examenes:
@@ -204,7 +204,7 @@ def menuCarrito(carro):
         print(f"Precio: {j.precio} ")
         print("------------------------------")
     print(f"Subtotal: {carro.getSubtotal()} ")
-    print(f"Descuento: {carro.getdescuento()} ")
+    print(f"Descuento: {carro.getdescuento(clinica)} ")
     print(f"Total: {carro.getTotal()}")
     print("------------------------------")
     input("Enter Para Proceder Al Pago")
@@ -395,7 +395,7 @@ def buscarCliente():
                 print("Opcion Ingresada No valida. PorFavor Ingresar De Nuevo.")
                 print("--------------------------------------------------------")
         carro = agendarExamen(rut,cliente.nombres)
-        menuCarrito(carro)
+        menuCarrito(carro,cliente.clinica_derivado)
 
 def crearCliente():
     print("[Crear Cliente]".center(50,"-"))
@@ -421,7 +421,7 @@ def crearCliente():
     cliente = Cliente(rut,nombres,apellido_paterno,apellido_materno,genero,fecha_nacimiento,email,telefono,domicilio,clinica_derivado,mascotas)
     guardarDatos('Clientes.csv',cliente.toStringCliente())
     carro = agendarExamen(rut,nombres)
-    menuCarrito(carro)
+    menuCarrito(carro,clinica_derivado)
 
 def menuAgendarExamen():
     print("[Cliente]".center(50,"-"))

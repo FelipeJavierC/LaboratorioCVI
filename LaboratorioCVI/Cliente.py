@@ -28,3 +28,7 @@ class Cliente:
     @property
     def nombres(self):
         return self._nombres
+
+    @property
+    def clinica_derivado(self):
+        return self._clinica_derivado
