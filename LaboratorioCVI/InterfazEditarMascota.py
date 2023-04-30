@@ -191,6 +191,7 @@ class EditarMascota(object):
         self.Peso = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.Peso.setGeometry(QtCore.QRect(450, 330, 121, 22))
         self.Peso.setObjectName("Peso")
+        self.Peso.setMaximum(500)
         self.Sexo = QtWidgets.QLineEdit(self.centralwidget)
         self.Sexo.setGeometry(QtCore.QRect(180, 330, 171, 20))
         self.Sexo.setStyleSheet("background-color: rgb(206, 206, 206);")

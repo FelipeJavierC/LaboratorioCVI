@@ -149,6 +149,7 @@ class BorrarMascota(object):
         mascota = main.BuscarMascota(nombre)
         if mascota != False:
             main.borrarMascota(nombre)
+            main.cliente.borrarMascota(nombre)
             self.abrir(InterfazBorrado.Borrado)
         else:
             self.TxtNoEncontrado.show()

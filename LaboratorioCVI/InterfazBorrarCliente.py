@@ -143,8 +143,8 @@ class BorrarCliente(object):
         mascotas = main.cargarDatosMascota(rut)
         cliente = main.cargarDatosCliente(rut,mascotas)
         if cliente != False:
-            main.borrarCliente()
             main.borrarMascotas()
+            main.borrarCliente()
             self.abrir(InterfazBorrado.Borrado)
         else:
             self.TxtNoEncontrado.show()

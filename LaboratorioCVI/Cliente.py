@@ -19,6 +19,15 @@ class Cliente:
                  f"{self._genero}",f"{self._fecha_nacimiento}",f"{self._email}",f"{self._telefono}",f"{self._domicilio}",f"{self._clinica_derivado}"]
         return lista
 
+    def borrarMascota(self,nombre):
+        j=0
+        nombre = nombre.lower()
+        for i in self._mascotas:
+            name = i.nombreM
+            name = name.lower()
+            if nombre == name:
+                del self._mascotas[j]
+            j+=1
 
     def agregarMascotas(self,mascota):
         self._mascotas.append(mascota)

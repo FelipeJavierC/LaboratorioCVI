@@ -55,10 +55,9 @@ def borrarMascotas():
         lines = file.readlines()
         file.seek(0)
         file.truncate()
-        for i in mascotas:
-            for number,line in enumerate(lines):
-                if number not in [i]:
-                    file.write(line)
+        for number,line in enumerate(lines):
+            if number not in mascotas:
+                file.write(line)
 
 def borrarCliente():
     with open('Clientes.csv') as file:
