@@ -117,13 +117,7 @@ def guardarDatos(archivo,lista):
 def crearMascota(nombre, especie, raza, fecha_nacimiento, sexo, peso, tamaño):
     mascota = Mascota(id, nombre, especie, raza, fecha_nacimiento, sexo, peso, tamaño)
     cliente.agregarMascotas(mascota)
-    guardarDatos('Clientes.csv', cliente.toStringCliente())
     guardarDatos('Mascotas.csv',mascota.toStringMascota())
-
-def EditarMascota(nombre, especie, raza, fecha_nacimiento, sexo, peso, tamaño):
-    mascota = Mascota(id, nombre, especie, raza, fecha_nacimiento, sexo, peso, tamaño)
-    cliente.agregarMascotas(mascota)
-    guardarDatos('Mascotas.csv', mascota.toStringMascota())
 
 def crearCliente(rut, nombres, apellido_paterno, apellido_materno, genero, fecha_nacimiento, email, telefono, domicilio, clinica_derivado):
     mascotas = []
@@ -131,6 +125,8 @@ def crearCliente(rut, nombres, apellido_paterno, apellido_materno, genero, fecha
     global id
     id=rut
     cliente = Cliente(rut,nombres,apellido_paterno,apellido_materno,genero,fecha_nacimiento,email,telefono,domicilio,clinica_derivado,mascotas)
+    guardarDatos('Clientes.csv', cliente.toStringCliente())
+
 
 def Ventana():
     InterfazMenuCliente.MenuCliente().mostrar()

@@ -318,7 +318,7 @@ class CrearMascota(object):
             sexo = self.Sexo.currentText()
             peso = self.Peso.text()
             tamaño = self.Tamano.currentText()
-            main.EditarMascota(nombre,especie,raza,fechaNacimiento,sexo,peso,tamaño)
+            main.crearMascota(nombre,especie,raza,fechaNacimiento,sexo,peso,tamaño)
             print(main.cliente.nombreCompleto, main.cliente.mascotas)
             if Bandera == True:
                 if InterfazNumeroMascotas.numeroMascotas == 1:
