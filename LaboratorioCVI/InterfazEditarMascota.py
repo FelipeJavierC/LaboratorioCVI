@@ -225,6 +225,25 @@ class EditarMascota(object):
         self.Peso.raise_()
         self.text_12.raise_()
         self.Sexo.raise_()
+        self.TxtNoEncontrado = QtWidgets.QLabel(self.centralwidget)
+        self.TxtNoEncontrado.setGeometry(QtCore.QRect(300, 380, 371, 21))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold Condensed")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setUnderline(False)
+        font.setWeight(75)
+        font.setStrikeOut(False)
+        font.setKerning(True)
+        self.TxtNoEncontrado.setFont(font)
+        self.TxtNoEncontrado.setStyleSheet("background-color: no color;\n"
+                                           "color:red;")
+        self.TxtNoEncontrado.setTextFormat(QtCore.Qt.AutoText)
+        self.TxtNoEncontrado.setAlignment(QtCore.Qt.AlignCenter)
+        self.TxtNoEncontrado.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+        self.TxtNoEncontrado.setObjectName("TxtNoEncontrado")
+        self.TxtNoEncontrado.hide()
         self.BotonGuardar = QtWidgets.QPushButton(self.centralwidget)
         self.BotonGuardar.setGeometry(QtCore.QRect(430, 430, 121, 41))
         font = QtGui.QFont()
@@ -262,11 +281,30 @@ class EditarMascota(object):
         self.BotonGuardar.clicked.connect(lambda: self.guardar(MainWindow,mascota))
 
     def cambio(self, MainWindow,Interfaz):
-        self.ventana = QtWidgets.QMainWindow()
-        self.ui = Interfaz()
-        self.ui.setupUi(self.ventana)
-        self.ventana.show()
-        MainWindow.close()
+        if self.Peso.text() == "" or self.Tamano.currentText() == "":
+            self.TxtNoEncontrado.show()
+            datos = [self.Peso,self.Tamano]
+            for i in datos:
+                try:
+                    if i.text() == "":
+                        i.setStyleSheet("border-style: solid;\n"
+                                        "border-color: red;\n"
+                                        "border-width: 1px;")
+                    else:
+                        i.setStyleSheet("")
+                except:
+                    if i.currentText() == "":
+                        i.setStyleSheet("border-style: solid;\n"
+                                        "border-color: red;\n"
+                                        "border-width: 1px;")
+                    else:
+                        i.setStyleSheet("")
+        else:
+            self.ventana = QtWidgets.QMainWindow()
+            self.ui = Interfaz()
+            self.ui.setupUi(self.ventana)
+            self.ventana.show()
+            MainWindow.close()
 
     def guardar(self,MainWindow,mascota):
         mascota.cambiarPeso(self.Peso.text())
@@ -298,3 +336,4 @@ class EditarMascota(object):
         self.Tamano.setItemText(3, _translate("MainWindow", "Grande"))
         self.text_12.setText(_translate("MainWindow", "kg"))
         self.BotonGuardar.setText(_translate("MainWindow", "GUARDAR"))
+        self.TxtNoEncontrado.setText(_translate("MainWindow", "Complete Los Datos Para Continuar."))

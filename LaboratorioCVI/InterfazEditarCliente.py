@@ -268,6 +268,25 @@ class EditarCliente(object):
         self.FechaNacimiento.raise_()
         self.Genero.raise_()
         self.DerivadoDe.raise_()
+        self.TxtNoEncontrado = QtWidgets.QLabel(self.centralwidget)
+        self.TxtNoEncontrado.setGeometry(QtCore.QRect(300, 380, 371, 21))
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift SemiBold Condensed")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setUnderline(False)
+        font.setWeight(75)
+        font.setStrikeOut(False)
+        font.setKerning(True)
+        self.TxtNoEncontrado.setFont(font)
+        self.TxtNoEncontrado.setStyleSheet("background-color: no color;\n"
+                                           "color:red;")
+        self.TxtNoEncontrado.setTextFormat(QtCore.Qt.AutoText)
+        self.TxtNoEncontrado.setAlignment(QtCore.Qt.AlignCenter)
+        self.TxtNoEncontrado.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+        self.TxtNoEncontrado.setObjectName("TxtNoEncontrado")
+        self.TxtNoEncontrado.hide()
         self.BotonGuardar = QtWidgets.QPushButton(self.centralwidget)
         self.BotonGuardar.setGeometry(QtCore.QRect(430, 430, 121, 41))
         font = QtGui.QFont()
@@ -314,13 +333,32 @@ class EditarCliente(object):
         MainWindow.close()
 
     def guardar(self, MainWindow):
-        main.cliente.cambiarEmail(self.Email.text())
-        main.cliente.cambiarTelefono(self.Telefono.text())
-        main.cliente.cambiarDomicilio(self.Domicilio.text())
-        main.cliente.cambiarDerivado(self.DerivadoDe.currentText())
-        main.borrarCliente()
-        main.guardarDatos('Clientes.csv', main.cliente.toStringCliente())
-        self.cambio(MainWindow, InterfazEditar.Editar)
+        if self.Email.text() == "" or self.Telefono.text() == "" or self.Domicilio.text() == "" or self.DerivadoDe.currentText() == "":
+            self.TxtNoEncontrado.show()
+            datos = [self.Email, self.Telefono, self.Domicilio, self.DerivadoDe]
+            for i in datos:
+                try:
+                    if i.text() == "":
+                        i.setStyleSheet("border-style: solid;\n"
+                                        "border-color: red;\n"
+                                        "border-width: 1px;")
+                    else:
+                        i.setStyleSheet("")
+                except:
+                    if i.currentText() == "":
+                        i.setStyleSheet("border-style: solid;\n"
+                                        "border-color: red;\n"
+                                        "border-width: 1px;")
+                    else:
+                        i.setStyleSheet("")
+        else:
+            main.cliente.cambiarEmail(self.Email.text())
+            main.cliente.cambiarTelefono(self.Telefono.text())
+            main.cliente.cambiarDomicilio(self.Domicilio.text())
+            main.cliente.cambiarDerivado(self.DerivadoDe.currentText())
+            main.borrarCliente()
+            main.guardarDatos('Clientes.csv', main.cliente.toStringCliente())
+            self.cambio(MainWindow, InterfazEditar.Editar)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -339,3 +377,4 @@ class EditarCliente(object):
         self.DerivadoDe.setItemText(1, _translate("MainWindow", "Clinica CVI"))
         self.DerivadoDe.setItemText(2, _translate("MainWindow", "Otro"))
         self.BotonGuardar.setText(_translate("MainWindow", "GUARDAR"))
+        self.TxtNoEncontrado.setText(_translate("MainWindow", "Complete Los Datos Para Continuar."))
