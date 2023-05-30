@@ -1,8 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import InterfazCrearExamen
 import InterfazEditar
+import InterfazMenu
 import InterfazMenuCliente
 import InterfazDetalle
+import InterfazMenuExamen
 import main
 
 
@@ -117,8 +120,10 @@ class BuscarCliente(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-        self.BotonAtras.clicked.connect(lambda: self.cambio(MainWindow, InterfazMenuCliente.MenuCliente))
+        if Bandera == None:
+            self.BotonAtras.clicked.connect(lambda: self.cambio(MainWindow, InterfazMenu.Menu))
+        else:
+            self.BotonAtras.clicked.connect(lambda: self.cambio(MainWindow, InterfazMenuCliente.MenuCliente))
         self.BuscarRut.returnPressed.connect(lambda: self.guardar(MainWindow,Bandera))
 
     def guardar(self,MainWindow,Bandera):
@@ -128,8 +133,10 @@ class BuscarCliente(object):
         if cliente != False:
             if Bandera == True:
                 self.cambio(MainWindow, InterfazEditar.Editar)
-            else:
+            elif Bandera == False:
                 self.cambio(MainWindow, InterfazDetalle.Detalle)
+            else:
+                self.cambio(MainWindow, InterfazMenuExamen.MenuExamen)
         else:
             self.TxtNoEncontrado.show()
 

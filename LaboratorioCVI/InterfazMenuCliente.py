@@ -6,6 +6,9 @@ import InterfazCrearCliente
 import InterfazEditar
 import sys
 
+import InterfazMenu
+
+
 class MenuCliente(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -159,6 +162,17 @@ class MenuCliente(object):
         self.ImgBuscarCliente.raise_()
         self.ImgBorrarCiente.raise_()
         self.Titulo.raise_()
+        self.BotonAtras = QtWidgets.QPushButton(self.centralwidget)
+        self.BotonAtras.setGeometry(QtCore.QRect(920, 460, 41, 41))
+        self.BotonAtras.setStyleSheet("background-color: no color;\n"
+                                      "border-style: solid;\n"
+                                      "border-width: 0px;")
+        self.BotonAtras.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("alo/Atras.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.BotonAtras.setIcon(icon)
+        self.BotonAtras.setIconSize(QtCore.QSize(40, 40))
+        self.BotonAtras.setObjectName("BotonAtras")
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -167,6 +181,7 @@ class MenuCliente(object):
         self.BotonBuscar.clicked.connect(lambda : self.cambio2(MainWindow,InterfazBuscarCliente.BuscarCliente,False))
         self.BotonBorrar.clicked.connect(lambda: self.cambio(MainWindow, InterfazBorrarCliente.BorrarCliente))
         self.BotonCrear.clicked.connect(lambda: self.cambio(MainWindow, InterfazCrearCliente.CrearCliente))
+        self.BotonAtras.clicked.connect(lambda: self.cambio(MainWindow, InterfazMenu.Menu))
 
     def cambio2(self, MainWindow,Interfaz,Bandera):
         self.ventana = QtWidgets.QMainWindow()
@@ -181,11 +196,3 @@ class MenuCliente(object):
         self.ui.setupUi(self.ventana)
         self.ventana.show()
         MainWindow.close()
-
-    def mostrar(self):
-        app = QtWidgets.QApplication(sys.argv)
-        MainWindow = QtWidgets.QMainWindow()
-        ui = MenuCliente()
-        ui.setupUi(MainWindow)
-        MainWindow.show()
-        sys.exit(app.exec_())
